@@ -1,5 +1,10 @@
 #!/bin/bash
 
+git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+git config --global user.email "robot@example.com"
+git config --global user.name "Codeship Robot"
+git remote set-branches --add origin gh-pages
+git fetch
 git checkout gh-pages
 
 git clone git@github.com:measurement-factory/functional-text-sandbox.git
