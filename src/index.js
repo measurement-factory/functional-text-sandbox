@@ -36,14 +36,7 @@ window.addEventListener("DOMContentLoaded", function () {
     let outputJsonNode = document.querySelector("#output-json");
     let outputHtmlNode = document.querySelector("#output-html");
 
-    let str = `
-    .p:: This is the documentation for functional text, and documents how we
-        .ul{
-            .li{testing1}
-            .li: .span .span testing2
-            .li testing3
-        }
-    `.trim();
+    let str = `Sample Text for parsing`.trim();
 
     inputNode.value = str;
     inputNode.style.height = '200px';
