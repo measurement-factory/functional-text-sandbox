@@ -19,3 +19,8 @@ cd ..
 
 cp functional-text-sandbox/deploy-result/* ./
 rm -rf functional-text-sandbox
+
+if ! git diff-index --quiet HEAD --; then
+    git commit -m "Updating gh-pages branch."
+    git push
+fi
