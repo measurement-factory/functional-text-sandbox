@@ -27,6 +27,7 @@ cp functional-text-sandbox/deploy-result/* ./
 rm -rf functional-text-sandbox
 
 if ! git diff-index --quiet HEAD --; then
+    git add index.html bundle.js bundle.js.map
     git commit -m "Updating gh-pages branch. (with sandbox @ $SANDBOX_COMMIT, and functional text @ $PARENT_COMMIT)"
     git push
 fi
