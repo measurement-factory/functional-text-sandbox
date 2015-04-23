@@ -22,16 +22,6 @@ class TagElement extends Parser.ParsedItem {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-    document.body.innerHTML = `
-    <p>Input:</p>
-    <textarea id="input"></textarea>
-    <p>HTML Output:</p>
-    <pre style="border: 1px solid black;" id="output-html"></pre>
-    <p>JSON Output:</p>
-    <pre style="border: 1px solid black;" id="output-json"></pre>
-    `.trim();
-
-
     let inputNode = document.querySelector("#input");
     let outputJsonNode = document.querySelector("#output-json");
     let outputHtmlNode = document.querySelector("#output-html");
@@ -67,6 +57,6 @@ window.addEventListener("DOMContentLoaded", function () {
         outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 
-    inputNode.addEventListener("keydown", runParser, 200);
+    inputNode.addEventListener("input", runParser, 200);
     runParser();
 });
