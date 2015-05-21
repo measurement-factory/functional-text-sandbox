@@ -7,19 +7,17 @@ git remote set-branches --add origin gh-pages
 git fetch
 git checkout gh-pages
 
-git clone git@github.com:measurement-factory/functional-text-sandbox.git
+git clone --depth 1 git@github.com:measurement-factory/functional-text-sandbox.git
 cd functional-text-sandbox
 SANDBOX_COMMIT=$(git rev-parse --verify master)
 
-git clone git@github.com:measurement-factory/functional-text.git
+git clone --depth 1 git@github.com:measurement-factory/functional-text.git
 cd functional-text
 PARENT_COMMIT=$(git rev-parse --verify master)
-npm install
-webpack
 cd ..
 
 npm install
-webpack -p
+webpack
 cp src/index.html deploy-result/index.html
 cd ..
 
