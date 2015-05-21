@@ -1,2 +1,92 @@
-!function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define(t);else{var n=t();for(var r in n)("object"==typeof exports?exports:e)[r]=n[r]}}(this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={exports:{},id:r,loaded:!1};return e[r].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){(function(e){"use strict";function t(e){return e&&e.__esModule?e:{"default":e}}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(e.__proto__=t)}var i=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),a=function(e,t,n){for(var r=!0;r;){var o=e,i=t,a=n;u=l=c=void 0,r=!1;var u=Object.getOwnPropertyDescriptor(o,i);if(void 0!==u){if("value"in u)return u.value;var c=u.get;return void 0===c?void 0:c.call(a)}var l=Object.getPrototypeOf(o);if(null===l)return void 0;e=l,t=i,n=a,r=!0}},u=n(!function(){var e=new Error('Cannot find module "../functional-text"');throw e.code="MODULE_NOT_FOUND",e}()),c=t(u);console.log(c["default"].ParsedItem);var l=function(t){function n(e){var t=e.name,o=e.children;r(this,n),a(Object.getPrototypeOf(n.prototype),"constructor",this).call(this,{children:o}),this.type="tag",this.name=t,this.classes=[]}return o(n,t),i(n,[{key:"toString",value:function(){var t=this.classes.length>0?' class="'+this.classes.join(" ")+'"':"";return e.JSON_OUTPUT?JSON.stringify(this,void 0,4):"<"+this.name+t+">"+this.children.join("")+"</"+this.name+">"}},{key:"addClass",value:function(e){this.classes.push(e)}}]),n}(c["default"].ParsedItem);window.addEventListener("DOMContentLoaded",function(){function t(){function t(e){var t=function(t,n){var r=this.parseRecursive(t,n);return this.newResult(new l({name:e,children:r.parsed}),r.raw)};i.addFunction(e,t)}var i=new c["default"];t("p"),t("span"),t("ul"),t("li"),e.JSON_OUTPUT=!0;var a=i.parse(n.value);e.JSON_OUTPUT=!1;var u=i.parse(n.value);r.innerHTML=a.replace(/</g,"&lt;").replace(/>/g,"&gt;"),o.innerHTML=u.replace(/</g,"&lt;").replace(/>/g,"&gt;")}var n=document.querySelector("#input"),r=document.querySelector("#output-json"),o=document.querySelector("#output-html"),i="Sample Text for parsing".trim();n.value=i,n.style.height="200px",n.style.width="100%",n.addEventListener("input",t,200),t()})}).call(t,function(){return this}())}])});
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define(factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var _functionalText = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"functional-text\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _functionalText2 = _interopRequireDefault(_functionalText);
+	
+	window.addEventListener("DOMContentLoaded", function () {
+	    var inputNode = document.querySelector("#input");
+	    var outputHtmlNode = document.querySelector("#output-html");
+	
+	    var str = "Sample Text for parsing".trim();
+	
+	    inputNode.value = str;
+	    inputNode.style.height = "200px";
+	    inputNode.style.width = "100%";
+	
+	    function runParser() {
+	        var parsedHtml = (0, _functionalText2["default"])(inputNode.value);
+	        outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	    }
+	
+	    inputNode.addEventListener("input", runParser, 200);
+	    try {
+	        runParser();
+	    } catch (err) {
+	        console.error(err);
+	    }
+	});
+
+/***/ }
+/******/ ])
+});
+;
 //# sourceMappingURL=bundle.js.map
