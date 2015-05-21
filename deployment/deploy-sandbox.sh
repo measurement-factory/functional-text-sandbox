@@ -3,13 +3,16 @@
 git config --global url.ssh://git@github.com/.insteadOf https://github.com/
 git config --global user.email "robot@example.com"
 git config --global user.name "Codeship Robot"
+
+SANDBOX_COMMIT=$(git rev-parse --verify master)
+
 git remote set-branches --add origin gh-pages
 git fetch
-git checkout gh-pages
+git checkout -f gh-pages
 
 git clone --depth 1 git@github.com:measurement-factory/functional-text-sandbox.git
 cd functional-text-sandbox
-SANDBOX_COMMIT=$(git rev-parse --verify master)
+git checkout -f $SANDBOX_COMMIT
 
 git clone --depth 1 git@github.com:measurement-factory/functional-text.git
 cd functional-text
@@ -17,6 +20,10 @@ PARENT_COMMIT=$(git rev-parse --verify master)
 cd ..
 
 npm install
+cd node_modules/functional-text
+make build-core # build into lib/ so that functional text can work.
+cd ../.. # in functional-text-sandbox oncemore
+
 webpack
 cp src/index.html deploy-result/index.html
 cd ..
