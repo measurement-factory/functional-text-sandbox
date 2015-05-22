@@ -66,7 +66,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var inputNode = document.querySelector("#input");
 	    var outputHtmlNode = document.querySelector("#output-html");
 	
-	    var str = "Sample Text for parsing".trim();
+	    var str = window.location.hash.length > 0 ? window.location.hash.substr(1) : "Sample Text for parsing".trim();
 	
 	    inputNode.value = str;
 	    inputNode.style.height = "200px";
