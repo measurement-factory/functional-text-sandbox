@@ -72,18 +72,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	    inputNode.style.height = "200px";
 	    inputNode.style.width = "100%";
 	
+	    var savedLog = console.log.bind(console);
+	    console.log = function () {
+	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	            args[_key] = arguments[_key];
+	        }
+	
+	        print.apply(undefined, args);
+	        savedLog.apply(undefined, args);
+	    };
+	
+	    function print() {
+	        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	            args[_key2] = arguments[_key2];
+	        }
+	
+	        outputHtmlNode.innerHTML += "<div>" + args.join(" ") + "</div>";
+	    }
+	
 	    function runParser() {
+	        outputHtmlNode.innerHTML = "";
+	
 	        try {
 	            var parsedHtml = (0, _functionalText2["default"])(inputNode.value);
 	            outputHtmlNode.style.borderColor = "black";
-	            outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	            print(parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 	        } catch (error) {
 	            outputHtmlNode.style.borderColor = "red";
-	            outputHtmlNode.innerHTML = error;
+	            print(error);
 	        }
 	    }
 	
-	    inputNode.addEventListener("input", runParser, 200);
+	    inputNode.addEventListener("input", runParser);
 	    runParser();
 	});
 
