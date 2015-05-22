@@ -28,23 +28,29 @@ window.addEventListener("DOMContentLoaded", function () {
         outputHtmlNode.innerHTML += `<div>${args.join(" ")}</div>`;
     }
 
-    function runParser() {
+    let openedWindow;
+
+    function runParser(onInput = false) {
         outputHtmlNode.innerHTML = "";
+
+        if ((openedWindow && !openedWindow.top) || (!openedWindow && onInput)) openedWindow = window.open();
 
         try {
             let parseResult = functionalText(inputNode.value);
             outputHtmlNode.style.borderColor = "black";
 
             print(encode(parseResult.toString()));
+            if (openedWindow) openedWindow.location = "data:text/html," + parseResult.toString();
             outputJsonNode.innerHTML = encode(JSON.stringify(parseResult, null, 4));
         } catch (error) {
             outputHtmlNode.style.borderColor = "red";
-            print(encode(error));
+            print(error);
+            console.error(error);
         }
 
         window.location.hash = `#${encodeURIComponent(inputNode.value)}`;
     }
 
-    inputNode.addEventListener("input", runParser);
+    inputNode.addEventListener("input", runParser.bind(null, true));
     runParser();
 });
