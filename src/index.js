@@ -10,17 +10,29 @@ window.addEventListener("DOMContentLoaded", function () {
     inputNode.style.height = '200px';
     inputNode.style.width = '100%';
 
+    let savedLog = console.log.bind(console);
+    console.log = function (...args) {
+        print(...args);
+        savedLog(...args);
+    };
+
+    function print(...args) {
+        outputHtmlNode.innerHTML += `<div>${args.join(" ")}</div>`;
+    }
+
     function runParser() {
+        outputHtmlNode.innerHTML = "";
+
         try {
             let parsedHtml = functionalText(inputNode.value);
             outputHtmlNode.style.borderColor = "black";
-            outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            print(parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;"));
         } catch (error) {
             outputHtmlNode.style.borderColor = "red";
-            outputHtmlNode.innerHTML = error;
+            print(error);
         }
     }
 
-    inputNode.addEventListener("input", runParser, 200);
+    inputNode.addEventListener("input", runParser);
     runParser();
 });
