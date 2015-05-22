@@ -4,7 +4,9 @@ window.addEventListener("DOMContentLoaded", function () {
     let inputNode = document.querySelector("#input");
     let outputHtmlNode = document.querySelector("#output-html");
 
-    let str = `Sample Text for parsing`.trim();
+    let str = window.location.hash.length > 0 ?
+        window.location.hash.substr(1) :
+        `Sample Text for parsing`.trim();
 
     inputNode.value = str;
     inputNode.style.height = '200px';
