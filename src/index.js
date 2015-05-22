@@ -33,6 +33,8 @@ window.addEventListener("DOMContentLoaded", function () {
             outputHtmlNode.style.borderColor = "red";
             print(error);
         }
+
+        window.location.hash = `#${window.escape(inputNode.value)}`;
     }
 
     inputNode.addEventListener("input", runParser);
