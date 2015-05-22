@@ -101,6 +101,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            outputHtmlNode.style.borderColor = "red";
 	            print(error);
 	        }
+	
+	        window.location.hash = "#" + window.escape(inputNode.value);
 	    }
 	
 	    inputNode.addEventListener("input", runParser);
