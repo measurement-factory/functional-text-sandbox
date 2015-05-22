@@ -73,16 +73,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    inputNode.style.width = "100%";
 	
 	    function runParser() {
-	        var parsedHtml = (0, _functionalText2["default"])(inputNode.value);
-	        outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	        try {
+	            var parsedHtml = (0, _functionalText2["default"])(inputNode.value);
+	            outputHtmlNode.style.borderColor = "black";
+	            outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	        } catch (error) {
+	            outputHtmlNode.style.borderColor = "red";
+	            outputHtmlNode.innerHTML = error;
+	        }
 	    }
 	
 	    inputNode.addEventListener("input", runParser, 200);
-	    try {
-	        runParser();
-	    } catch (err) {
-	        console.error(err);
-	    }
+	    runParser();
 	});
 
 /***/ },
@@ -2069,11 +2071,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(30);
 	__webpack_require__(31);
 	__webpack_require__(32);
-	__webpack_require__(37);
 	__webpack_require__(33);
 	__webpack_require__(34);
 	__webpack_require__(35);
 	__webpack_require__(36);
+	__webpack_require__(37);
 	__webpack_require__(38);
 	__webpack_require__(39);
 	__webpack_require__(40);
@@ -3616,6 +3618,23 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	var $    = __webpack_require__(64)
+	  , cof  = __webpack_require__(66)
+	  , $def = __webpack_require__(67);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.7 String.prototype.includes(searchString, position = 0)
+	  includes: function includes(searchString /*, position = 0 */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    return !!~String($.assertDefined(this)).indexOf(searchString, arguments[1]);
+	  }
+	});
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var $def = __webpack_require__(67);
 	
 	$def($def.P, 'String', {
@@ -3624,7 +3643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3645,7 +3664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $     = __webpack_require__(64)
@@ -3682,7 +3701,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $def = __webpack_require__(67);
@@ -3696,23 +3715,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    while(length > index)result[index] = arguments[index++];
 	    result.length = length;
 	    return result;
-	  }
-	});
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $    = __webpack_require__(64)
-	  , cof  = __webpack_require__(66)
-	  , $def = __webpack_require__(67);
-	
-	$def($def.P, 'String', {
-	  // 21.1.3.7 String.prototype.includes(searchString, position = 0)
-	  includes: function includes(searchString /*, position = 0 */){
-	    if(cof(searchString) == 'RegExp')throw TypeError();
-	    return !!~String($.assertDefined(this)).indexOf(searchString, arguments[1]);
 	  }
 	});
 
