@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", function () {
     let outputHtmlNode = document.querySelector("#output-html");
 
     let str = window.location.hash.length > 0 ?
-        decodeURI(window.location.hash.substr(1)) :
+        decodeURIComponent(window.location.hash.substr(1)) :
         `Sample Text for parsing`.trim();
 
     inputNode.value = str;
@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", function () {
             print(error);
         }
 
-        window.location.hash = `#${encodeURI(inputNode.value)}`;
+        window.location.hash = `#${encodeURIComponent(inputNode.value)}`;
     }
 
     inputNode.addEventListener("input", runParser);
