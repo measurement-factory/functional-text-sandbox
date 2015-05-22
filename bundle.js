@@ -65,6 +65,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	window.addEventListener("DOMContentLoaded", function () {
 	    var inputNode = document.querySelector("#input");
 	    var outputHtmlNode = document.querySelector("#output-html");
+	    var outputJsonNode = document.querySelector("#output-json");
 	
 	    var str = window.location.hash.length > 0 ? decodeURIComponent(window.location.hash.substr(1)) : "Sample Text for parsing".trim();
 	
@@ -94,9 +95,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        outputHtmlNode.innerHTML = "";
 	
 	        try {
-	            var parsedHtml = (0, _functionalText2["default"])(inputNode.value);
+	            var parseResult = (0, _functionalText2["default"])(inputNode.value);
 	            outputHtmlNode.style.borderColor = "black";
-	            print(parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+	
+	            print(parseResult.toString().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+	            outputJsonNode.innerHTML = JSON.stringify(parseResult, null, 4).replace(/</g, "&lt;").replace(/>/g, "&gt;");
 	        } catch (error) {
 	            outputHtmlNode.style.borderColor = "red";
 	            print(error);
