@@ -19,13 +19,7 @@ cd functional-text
 PARENT_COMMIT=$(git rev-parse --verify master)
 cd ..
 
-npm install
-cd node_modules/functional-text
-make build-core # build into lib/ so that functional text can work.
-cd ../.. # in functional-text-sandbox oncemore
-
-webpack
-cp src/index.html deploy-result/index.html
+make build
 cd ..
 
 cp functional-text-sandbox/deploy-result/* ./
