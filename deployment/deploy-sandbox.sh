@@ -19,6 +19,7 @@ cd functional-text
 PARENT_COMMIT=$(git rev-parse --verify master)
 cd ..
 
+make install-functional-text
 make build
 cd ..
 
