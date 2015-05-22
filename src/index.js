@@ -11,14 +11,16 @@ window.addEventListener("DOMContentLoaded", function () {
     inputNode.style.width = '100%';
 
     function runParser() {
-        let parsedHtml = functionalText(inputNode.value);
-        outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        try {
+            let parsedHtml = functionalText(inputNode.value);
+            outputHtmlNode.style.borderColor = "black";
+            outputHtmlNode.innerHTML = parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        } catch (error) {
+            outputHtmlNode.style.borderColor = "red";
+            outputHtmlNode.innerHTML = error;
+        }
     }
 
     inputNode.addEventListener("input", runParser, 200);
-    try {
-        runParser();
-    } catch (err) {
-        console.error(err);
-    }
+    runParser();
 });
