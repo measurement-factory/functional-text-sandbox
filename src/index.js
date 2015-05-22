@@ -1,4 +1,9 @@
+import he from "he";
 import functionalText from "functional-text";
+
+function encode(str) {
+    return he.encode(str, { useNamedReferences: true });
+}
 
 window.addEventListener("DOMContentLoaded", function () {
     let inputNode = document.querySelector("#input");
@@ -30,11 +35,11 @@ window.addEventListener("DOMContentLoaded", function () {
             let parseResult = functionalText(inputNode.value);
             outputHtmlNode.style.borderColor = "black";
 
-            print(parseResult.toString().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
-            outputJsonNode.innerHTML = JSON.stringify(parseResult, null, 4).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            print(encode(parseResult.toString()));
+            outputJsonNode.innerHTML = encode(JSON.stringify(parseResult, null, 4));
         } catch (error) {
             outputHtmlNode.style.borderColor = "red";
-            print(error);
+            print(encode(error));
         }
 
         window.location.hash = `#${encodeURIComponent(inputNode.value)}`;
