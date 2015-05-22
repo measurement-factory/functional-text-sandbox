@@ -3,6 +3,7 @@ import functionalText from "functional-text";
 window.addEventListener("DOMContentLoaded", function () {
     let inputNode = document.querySelector("#input");
     let outputHtmlNode = document.querySelector("#output-html");
+    let outputJsonNode = document.querySelector("#output-json");
 
     let str = window.location.hash.length > 0 ?
         decodeURIComponent(window.location.hash.substr(1)) :
@@ -26,9 +27,11 @@ window.addEventListener("DOMContentLoaded", function () {
         outputHtmlNode.innerHTML = "";
 
         try {
-            let parsedHtml = functionalText(inputNode.value);
+            let parseResult = functionalText(inputNode.value);
             outputHtmlNode.style.borderColor = "black";
-            print(parsedHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+
+            print(parseResult.toString().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+            outputJsonNode.innerHTML = JSON.stringify(parseResult, null, 4).replace(/</g, "&lt;").replace(/>/g, "&gt;");
         } catch (error) {
             outputHtmlNode.style.borderColor = "red";
             print(error);
