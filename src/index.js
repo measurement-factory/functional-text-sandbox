@@ -7,6 +7,7 @@ function encode(str) {
 
 window.addEventListener("DOMContentLoaded", function () {
     let inputNode = document.querySelector("#input");
+    let outputTextNode = document.querySelector("#output-text");
     let outputHtmlNode = document.querySelector("#output-html");
     let outputJsonNode = document.querySelector("#output-json");
 
@@ -28,29 +29,40 @@ window.addEventListener("DOMContentLoaded", function () {
         outputHtmlNode.innerHTML += `<div>${args.join(" ")}</div>`;
     }
 
+    function output(parseResult) {
+        let stringResult = parseResult.toString();
+
+        if (openedWindow) openedWindow.location = "data:text/html," + stringResult;
+        outputTextNode.innerHTML = `<div>${encode(stringResult)}</div>`;
+        outputHtmlNode.innerHTML = `<div>${stringResult}</div>`;
+        outputJsonNode.innerHTML = encode(JSON.stringify(parseResult, null, 4));
+    }
+
     let openedWindow;
 
-    function runParser(onInput = false) {
+    function runParser() {
         outputHtmlNode.innerHTML = "";
+        outputTextNode.style.borderColor = "black";
 
-        if ((openedWindow && !openedWindow.top) || (!openedWindow && onInput)) openedWindow = window.open();
-
+        let parseResult;
         try {
-            let parseResult = functionalText(inputNode.value);
-            outputHtmlNode.style.borderColor = "black";
-
-            print(encode(parseResult.toString()));
-            if (openedWindow) openedWindow.location = "data:text/html," + parseResult.toString();
-            outputJsonNode.innerHTML = encode(JSON.stringify(parseResult, null, 4));
+            parseResult = functionalText(inputNode.value);
         } catch (error) {
-            outputHtmlNode.style.borderColor = "red";
-            print(error);
             console.error(error);
+            outputTextNode.style.borderColor = "red";
+            outputTextNode.innerHTML = error;
         }
 
+        if (parseResult) output(parseResult);
         window.location.hash = `#${encodeURIComponent(inputNode.value)}`;
     }
 
-    inputNode.addEventListener("input", runParser.bind(null, true));
+    inputNode.addEventListener("input", runParser);
+
+    document.querySelector("#preview-button").addEventListener("click", () => {
+        openedWindow = window.open();
+        runParser();
+    });
+
     runParser();
 });
